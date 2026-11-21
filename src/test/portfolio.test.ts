@@ -1,11 +1,11 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { projects, developerProfile, techStack } from '../src/data/projects';
-import { Project, DeveloperProfile } from '../src/types/portfolio';
+import { projects, developerProfile, techStack } from '../data/projects';
+import { Project, DeveloperProfile, TechItem } from '../types/portfolio';
 
 describe('Portfolio Data Schema & Validation', () => {
   it('should contain at least 3 featured projects including ai-agent-core', () => {
     expect(projects.length).toBeGreaterThanOrEqual(3);
-    const aiAgentCore = projects.find(p => p.id === 'ai-agent-core');
+    const aiAgentCore = projects.find((p: Project) => p.id === 'ai-agent-core');
     expect(aiAgentCore).toBeDefined();
     expect(aiAgentCore?.title).toBe('ai-agent-core');
   });
@@ -33,12 +33,12 @@ describe('Portfolio Data Schema & Validation', () => {
   });
 
   it('should contain required tech stack items (TypeScript, Node/Fastify, Go, AI/LLM, Vue/React)', () => {
-    const techNames = techStack.map(t => t.name.toLowerCase());
-    expect(techNames.some(t => t.includes('typescript'))).toBe(true);
-    expect(techNames.some(t => t.includes('node') || t.includes('fastify'))).toBe(true);
-    expect(techNames.some(t => t.includes('go'))).toBe(true);
-    expect(techNames.some(t => t.includes('ai') || t.includes('llm'))).toBe(true);
-    expect(techNames.some(t => t.includes('vue') || t.includes('react'))).toBe(true);
+    const techNames = techStack.map((t: TechItem) => t.name.toLowerCase());
+    expect(techNames.some((t: string) => t.includes('typescript'))).toBe(true);
+    expect(techNames.some((t: string) => t.includes('node') || t.includes('fastify'))).toBe(true);
+    expect(techNames.some((t: string) => t.includes('go'))).toBe(true);
+    expect(techNames.some((t: string) => t.includes('ai') || t.includes('llm'))).toBe(true);
+    expect(techNames.some((t: string) => t.includes('vue') || t.includes('react'))).toBe(true);
   });
 });
 
